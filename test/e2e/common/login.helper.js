@@ -1,10 +1,9 @@
 module.exports = (function () {
   'use strict';
 
-  var WAIT_FOR_LOADER_TO_APPEAR = 1000;
-  var WAIT_FOR_LOADER_TO_DISAPPEAR = 25000;
+  var WAIT_FOR_PAGE = 5000;
 
-  var EC = protractor.ExpectedConditions;
+  var utils = require('../common/utils.js');
 
   var LoginPage = require('../pages/login.page.js');
   var loginPage = new LoginPage();
@@ -30,42 +29,19 @@ module.exports = (function () {
     loginPage.setPassword(password);
     loginPage.login();
 
-    // Wait max. 1 second for the loader to appear, in some cases the loader is shown so briefly that the browser.wait
-    // function cannot pick it up (especially when running with a mock auth implementation), in that case browser.wait
-    // invokes the error callback but we do not want to treat this as a failure, in both cases we want to continue.
-
-    browser.wait(EC.presenceOf(element(by.css('.loading-container.visible.active'))), WAIT_FOR_LOADER_TO_APPEAR).then(
-
-      // Handle both the success and error conditions with the same call to "loginDone()", see explanation here:
-      // http://stackoverflow.com/questions/34740129/protractor-wait-on-condition-should-not-fail-after-timeout
-      function () {   // SUCCESS CALLBACK
-        expect(element(by.css('.loading-container.visible.active')).isPresent()).toBeTruthy('Loader shown');
-
-        loginDone();
-      },
-      function () {   // ERROR CALLBACK
-        loginDone();
-      });
+    utils.waitForLoader();
   };
-
-  function loginDone() {
-
-    // wait for the loader to disappear
-    browser.wait(EC.not(EC.presenceOf(element(by.css('.loading-container.visible.active')))),
-      WAIT_FOR_LOADER_TO_DISAPPEAR).then(function () {
-        expect(element(by.css('.loading-container.visible.active')).isPresent()).toBeFalsy('Loader hidden');
-      });
-  }
 
   var ensureLoggedIn = function (gotoPage) {
 
     browser.get('/#' + (gotoPage || '/'));
 
-    loginPage.isLoggedIn().then(function (result) {
-      if (result.loggedIn) {
-        console.log("URL: '" + result.url + "', already logged in");
+    sideMenu.logout.isDisplayed().then(function (displayed) {
+
+      if (displayed) {
+        console.log("Already logged in");
       } else {
-        console.log("URL: '" + result.url + "', logging in now");
+        console.log("Not logged in, logging in now");
 
         loginPage.load();
         login();
@@ -75,6 +51,8 @@ module.exports = (function () {
 
       if (gotoPage) {
         browser.setLocation(gotoPage);
+        // necessary ?
+        //utils.waitForPage(gotoPage, 'Loaded ' + goto);
       }
     });
   };
@@ -83,8 +61,13 @@ module.exports = (function () {
     expect(sideMenu.logout.isPresent()).toBeTruthy('Logout option shown');
 
     sideMenu.clickLogout();
-    expect(browser.getLocationAbsUrl()).toContain(logoutPage.url, 'Logged out');
+
+    waitForLogoutPage();
   };
+
+  function waitForLogoutPage() {
+    utils.waitForPage(logoutPage.url, 'Logged out');
+  }
 
   var logoutAndGotoLoginPage = function () {
     logout();
@@ -97,11 +80,7 @@ module.exports = (function () {
   };
 
   var checkSuccessfulLogin = function () {
-    // After a successful login we expect the URL to start with "/app/" (if login was unsuccessful then the URL remains
-    // '/login')
-    var urlAfterLogin = loginPage.loggedinUrl;
-
-    expect(browser.getLocationAbsUrl()).toContain(urlAfterLogin, 'Logged in successfully');
+    expect(sideMenu.logout.isPresent()).toBeTruthy('Logout option shown');
   };
 
   var checkFailedLogin = function () {
