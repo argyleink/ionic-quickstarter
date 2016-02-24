@@ -19,7 +19,7 @@
   angular.module('app', [
     // libraries
     'ionic',
-    "firebase",
+    "kinto",
     'ngCordova', 'ngMessages', 'fusionMessages',
     // angular-translate
     'pascalprecht.translate',

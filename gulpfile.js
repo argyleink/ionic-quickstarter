@@ -66,6 +66,7 @@ var paths = {
   ionicfonts: ['./src/lib/ionic/fonts/*'],
   lib: [
     './src/lib/ionic/js/' + files.ionicbundle,
+    './src/lib/kinto.js/kinto-1.1.1.js',
     './src/lib/angular-resource/angular-resource.min.js',
     './src/lib/angular-messages/angular-messages.min.js',
     './src/lib/angular-elastic/elastic.js',
