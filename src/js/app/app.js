@@ -19,7 +19,6 @@
   angular.module('app', [
     // libraries
     'ionic',
-    "kinto",
     'ngCordova', 'ngMessages', 'fusionMessages',
     // angular-translate
     'pascalprecht.translate',
@@ -30,7 +29,7 @@
     // config
     'app.config',
     // generic services
-    'app.util', 'app.firebase', 'app.hooks', 'app.user', 'app.oauthUtil', 'app.image',
+    'app.util', 'app.hooks', 'app.user', 'app.oauthUtil', 'app.image',
     // controllers and routers
     'app.intro', 'app.auth.signup', 'app.auth.login', 'app.auth.forgotPassword', 'app.auth.changePassword',
     'app.mainPage', 'app.manage',

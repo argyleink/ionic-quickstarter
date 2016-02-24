@@ -3,9 +3,7 @@
 
 appModule('app.user')
 
-  .factory('UserServiceFirebaseImpl', function ($q, $log, $rootScope, Stopwatch, AppHooks, User, fbutil, $firebaseAuth,
-                                                $firebaseObject, $firebaseArray, oauthHelper,
-                                                TwitterReauthentication) {
+  .factory('UserServiceFirebaseImpl', function ($q, $log, $rootScope, Stopwatch, AppHooks, User, fbutil, $firebaseAuth, $firebaseObject, $firebaseArray, oauthHelper, TwitterReauthentication) {
 
     var FIREBASE_PASSWORD_PROVIDER = 'password';
     var FIREBASE_TWITTER_PROVIDER = 'twitter';
