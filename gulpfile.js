@@ -1,39 +1,27 @@
-//
-// BEGIN - gulp.js
-//
-
-//
-// === DEPENDENCIES ===
-//
-
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var bower = require('bower');
-var concat = require('gulp-concat');
-var del = require('del');
-var jshint = require('gulp-jshint');
-var sass = require('gulp-sass');
-var minifyCss = require('gulp-minify-css');
-var sourcemap = require('gulp-sourcemaps');
-var vinylPaths = require('vinyl-paths');
-var rename = require('gulp-rename');
-var ngAnnotate = require('gulp-ng-annotate');
-var uglify = require("gulp-uglify");
-var imagemin = require('gulp-imagemin');
-var htmlreplace = require('gulp-html-replace');
-var replace = require('gulp-replace');
-var sh = require('shelljs');
-var karma = require('karma').server;
-var ngConstant = require('gulp-ng-constant');
-var extend = require('gulp-extend');
-var gulpif = require('gulp-if');
-var minifyHtml    = require('gulp-minify-html');
-var templateCache = require('gulp-angular-templatecache');
-var inject = require('gulp-inject');
-
-//
-// === PATHS ===
-//
+var gulp            = require('gulp');
+var gutil           = require('gulp-util');
+var bower           = require('bower');
+var concat          = require('gulp-concat');
+var del             = require('del');
+var jshint          = require('gulp-jshint');
+var sass            = require('gulp-sass');
+var minifyCss       = require('gulp-minify-css');
+var sourcemap       = require('gulp-sourcemaps');
+var vinylPaths      = require('vinyl-paths');
+var rename          = require('gulp-rename');
+var ngAnnotate      = require('gulp-ng-annotate');
+var uglify          = require("gulp-uglify");
+var imagemin        = require('gulp-imagemin');
+var htmlreplace     = require('gulp-html-replace');
+var replace         = require('gulp-replace');
+var sh              = require('shelljs');
+var karma           = require('karma').server;
+var ngConstant      = require('gulp-ng-constant');
+var extend          = require('gulp-extend');
+var gulpif          = require('gulp-if');
+var minifyHtml      = require('gulp-minify-html');
+var templateCache   = require('gulp-angular-templatecache');
+var inject          = require('gulp-inject');
 
 // Files
 //
@@ -45,10 +33,10 @@ var inject = require('gulp-inject');
 // (the unminified ionic.bundle.js needs to have the extra console.log statement as explained in the article)
 //
 var files = {
-  jsbundle: 'app.bundle.min.js',
-  appcss: 'app.css',
+  jsbundle:       'app.bundle.min.js',
+  appcss:         'app.css',
   ionicappmincss: 'ionic.app.min.css',
-  ionicbundle: 'ionic.bundle.min.js'    // change to 'ionic.bundle.js' for debugging moduleErr errors
+  ionicbundle:    'ionic.bundle.min.js'    // change to 'ionic.bundle.js' for debugging moduleErr errors
 };
 // Paths
 var paths = {
@@ -67,13 +55,14 @@ var paths = {
     '!./src/js/app/application.ctrl.js',      /* exclude the root module ('app' module) files */
     '!./src/js/app/application.service.js'    /* exclude the root module ('app' module) files */
   ],
-  images: ['./src/img/**/*'],
-  templates: ['./src/js/**/*.html'],
-  indexTemplate: ['./src/index-template.html'],
-  index: ['./src/index.html'],
+  images:         ['./src/img/**/*'],
+  templates:      ['./src/js/**/*.html'],
+  indexTemplate:  ['./src/index-template.html'],
+  index:          ['./src/index.html'],
   locales: [
     './src/js/locales/*.json'
   ],
+  // TODO: use system fonts
   ionicfonts: ['./src/lib/ionic/fonts/*'],
   lib: [
     './src/lib/ionic/js/' + files.ionicbundle,
@@ -85,8 +74,6 @@ var paths = {
     './src/lib/angular-translate/angular-translate.min.js',
     './src/lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js',
     './src/lib/fus-messages/dist/fus-messages.js',
-    './src/lib/firebase/firebase.js',
-    './src/lib/angularfire/dist/angularfire.min.js',
     './src/lib/jsSHA/src/sha1.js',
     './src/js/lib/ng-img-crop-customized/ng-img-crop.min.js',
     './src/js/lib/logentries/le.min.js'
@@ -134,8 +121,17 @@ gulp.task('test-single', function (done) {
 
 // Note: use before 'ionic build' or 'ionic run'.
 // See: https://github.com/driftyco/ionic-cli/issues/345#issuecomment-88659079
-gulp.task('build', ['clean', 'sass', 'scripts', 'prod-config', 'imagemin', 'templates',
-                    'inject-index', 'index', 'copy']);
+gulp.task('build', [
+  'clean', 
+  'sass', 
+  'scripts', 
+  'prod-config', 
+  'imagemin', 
+  'templates', 
+  'inject-index', 
+  'index', 
+  'copy'
+]);
 
 // utility tasks for DEV/PROD/TEST (whichever)
 
