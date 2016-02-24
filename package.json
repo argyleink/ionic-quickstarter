@@ -1,6 +1,6 @@
 {
-  "name": "app",
-  "version": "1.0.0",
+  "name": "kinnect",
+  "version": "0.0.1",
   "private": true,
   "description": "app: An Ionic project",
   "dependencies": {
@@ -57,7 +57,9 @@
     "preupdate-webdriver": "npm install",
     "update-webdriver": "webdriver-manager update",
     "preprotractor": "npm run update-webdriver",
-    "protractor": "protractor protractor.conf.js"
+    "protractor": "protractor protractor.conf.js",
+    "dev": "ionic serve -c",
+    "labs": "ionic serve -l -c"
   },
   "cordovaPlatforms": []
 }
