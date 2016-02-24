@@ -1,66 +1,8 @@
-# Ionic Quickstarter
+# Kinnect
 
-### A boilerplate and Reference app providing tools and best practices to kickstart your app development
-
-For background, read my
-<a href="http://codepen.io/leob6/blog/ionic-quickstarter-a-starter-app-to-kickstart-your-app-development" target="_blank">
-blog post</a>.
-
-***IMPORTANT NOTE:*** I've added two useful sections to the Wiki:
-
-* [Release notes](https://github.com/leob/ionic-quickstarter/wiki/Release-notes)
-* [Tips and troubleshooting](https://github.com/leob/ionic-quickstarter/wiki/Tips-and-troubleshooting)
-
-Please make a habit of consulting these Wiki pages because they contain important information. 
-
-I intend to keep this starter app up to date with the newest versions of Ionic etc, and to add features/improvements.
-See [Todo and Roadmap](https://github.com/leob/ionic-quickstarter/wiki/Todo-and-roadmap) on the Wiki, and feel free to
-[contribute](https://github.com/leob/ionic-quickstarter/wiki/Contributing).
-
-***NOTE:*** this starter app is based on Ionic 1.x and Angular 1.x.
-
-The upcoming new Ionic 2 release will, in all likelihood, address 80-90% of the issues which this starter app aims to
-address (e.g. build system, SASS/styling, common Ionic 'gotchas' and so on). So, "post-Ionic 2" this starter (and most
-other starters) will probably lose a lot of their relevance.
-
-## Table of contents
-
-[Introduction](#introduction)<br>
-[Installation and usage](#installation-and-usage)<br>
-[Gulp file](#gulp-file)<br>
-[Project structure](#project-structure)<br>
-[Contribute](#contributing)
-
-## Introduction
-
-Ionic Quickstarter is based on the "tabs starter" project from Ionic, but has the following extras:
-
-* An improved gulp.js file (with a build process optimized for production, with template caching etc)
-* Improved project structure (a modular app structure suitable for bigger apps)
-* Application script files (Javascript) will be automatically included in your index.html by the gulp build process  
-* Per environment, you can define different values for constants (e.g. appKey and so on) which are then written into
-  config.js by the appropriate gulp task
-* Unit test support using Karma and Jasmine
-* Typescript Definition Files ('tsd' files) which enable autocomplete/intelli-sense features when you use an IDE such
-as WebStorm or Visual Studio
-* Signup and login flow implemented with Firebase (with the flexibility to add other implementations)
-* Support for the two main Ionic UI patterns: side menus and tabs, and an Intro screen with a Slider
-* Includes some commonly used features, for instance form validation using ng-messages and improved logging
-* Basic image support: Cordova camera, image cropping, storing images in local storage, and displaying images
-* Supports internationalization (I18N) using the <a href="https://github.com/angular-translate/angular-translate"
-target="_blank">angular-translate</a> library (currently only an English language file is supplied, it's easy to add
-other languages)
-* Provides workarounds for a number of well-known issues in Ionic apps (swipe to close menu, hardware back button etc)
-* Incorporates a number of 'best practices' for AngularJS and Ionic (e.g. "Controller as" syntax)
-* A modular SASS setup including some handy utility styles and best practices for customization of colors, fonts etc.
-* Reusable services and directives containing some commonly used utility functions that you can call in your app 
-* An 'appModule' utility function that makes managing your AngularJS modules slightly easier
-* Currently based on Ionic v.1.1.0 and AngularJS 1.4; tested on 3 devices: iPhone 4, Android smartphone, Android tablet
-
-The first two topics (Project structure and Gulp file) will be explained below.
-
-To keep this README short (it's already too long), I'm putting the rest of the information on the
-[Wiki](https://github.com/leob/ionic-quickstarter/wiki).
+### This started from a boilerplate and Reference app providing tools and best practices to kickstart ionic app development
+For background and more info, peep the fork 
+<a href="https://github.com/leob/ionic-quickstarter" target="_blank">Original Fork</a>.
 
 ## Installation and usage
 
@@ -80,122 +22,35 @@ work yet at the moment.
 
 The version I am currently using is v4.2.6, so that is what I would recommend (v4.2.6 or higher, but not v.5.x).
 
-***Tip:*** instead of locally installing all of the above tools, an alternative may be to use the
-<a href="https://github.com/driftyco/ionic-box" target="_blank">Ionic Box</a>. This can be an attractive option,
-especially for Windows users.
-
-***Warning:*** there have been many complaints on the Ionic forum from people who are unable to get 'SASS' working on
-their system. Typically they see this error:
- 
-```libsass bindings not found. Try reinstalling node-sass?```
- 
-For background on the issue, see:
-
-http://forum.ionicframework.com/t/error-running-gulp-sass/32311
-http://forum.ionicframework.com/t/libsass-bindings-not-found/27881
-
-However, this problem **SHOULD** not occur when you install the quickstarter app, because I've upgraded ```gulp-sass```
-to a version that should be compatible with both the 'old' and the 'new' nodejs versions.
-
-Assuming that you have all of the above installed successfully, open a terminal and "cd" into the directory where you
-want to install your app.
-
-Run the following commands (note: below the app is named ```myapp```, replace this by your app's name):
-
-<pre>
-git clone https://github.com/leob/ionic-quickstarter
-mv ionic-quickstarter myapp
-cd myapp
-</pre>
-
-If you want to put your app under source control and you use Git, type the command:
-
-<pre>
-git init
-</pre>
-
-***NOTE:*** after ```git init``` the Git repo will still point to ```https://github.com/leob/ionic-quickstarter``` as
-the remote/upstream repo, as you can see by running the ```git remote -v``` command.
-
-As a result, "git push" will not work (unless you would have commit rights to my git repo).
-
-To fix this, change the remote repo, either using the proper ```git``` commands, or by editing the file
-```.git/config``` in a text editor. If you open ```.git/config``` in a text editor, you will see these lines:
-
-<pre>
-[remote "origin"]
-	url = https://github.com/leob/ionic-quickstarter
-	fetch = +refs/heads/*:refs/remotes/origin/*
-</pre>
-
-You can either remove these 3 lines completely, or change the ```url``` property to the desired remote repository URL.
-
-***NOTE:*** the next step (editing ionic.project and config.xml to change the app name) is OPTIONAL. You can skip this
-step and do it later (or not at all), if you want. If you want to do it, then edit the following two files using a text
-editor:
-
-<pre>
-ionic.project
-config.xml
-</pre>
-
-In these files, replace the name ```app``` with the name you want to give to your app as follows:
-
-* in ```ionic.project```: at line 2 ("name": "app"), replace ```app``` with your app name
-* in ```config.xml```: at line 2, replace ```com.ionicframework.app``` with your package name (e.g.
-```com.mycompany.myapp```), and at line 3 replace ```app``` with your app name
+Assuming that you have all of the above installed successfully, open a terminal and "cd" into the directory where you want to install your app.
 
 Finish the installation by entering the following commands:
 
 <pre>
-npm install
-bower install
+npm i && bower i
 ionic state restore --plugins
 </pre>
 
-Finally, if you want to add Android and/or iOS as a runtime platform, type one or both of the following commands:
+If you plan to build to a device, then you'll need to add the platforms to your local env:
 
 <pre>
 ionic platform add android
 ionic platform add ios
 </pre>
 
-The project is now ready to run. To run it in a browser, type (I advise to ALWAYS use the ```-c``` option):
+The project is now ready to run. To run it in a browser, type (I advise to ALWAYS use the ```-c``` option for console log):
 
 <pre>
 ionic serve -c
+npm run dev
 </pre>
 
 or any other variation, e.g. (using the "labs" feature, logging to the console, and defaulting to Chrome):
 
 <pre>
-ionic serve -l -c --browser google-chrome
-</pre>
-
-Click through the app: try the tabs, menus and so on.
-
-If you click the menu item ```log out``` then you will be presented with the login page. In
-development mode this is a 'fake' login page. To log in, simply type an arbitrary email address (can be fake too), and
-for the password type the text ```password```.
-
-***NOTE:*** if, after executing ```ionic serve``` you get a blank page in your browser with the message
-```Error: ENOENT: no such file or directory ... index.html``` then it indicates that the "gulp-inject" process wasn't
-able to create an index.html file from the index-template.html file.
-
-In this happens, I would advise you to run "ionic serve" with the arguments '-l' and '-c', so:
-
-<pre>
 ionic serve -l -c
+npm run labs
 </pre>
-
-In some cases, the addition of "-l" in itself seems to be already enough to fix the problem (not sure about this).
-
-However if the problem remains, then look at the messages in your console (terminal) window, which were enabled through
-the "-c" argument. Normally you should see an error message/stacktrace in the terminal/console which should tell you
-what is going wrong.
-
-One possible cause for the above error seems to be the ```libsass bindings not found``` error which was discussed
-above. However as said above this error **SHOULD** not occur anymore since I've upgraded the ```gulp-sass``` version.
 
 ### Some notes on usage
 
@@ -219,10 +74,7 @@ The ```gulp``` build process will write these values to ```src/js/config/config.
 
 #### Production mode
 
-In production mode (used on a real device), the gulp build process does a complete build including minification,
-concatenation etc, and the app runs with 'real' services.
-
-(e.g. the Firebase service for signup/login, but you can replace this with an implementation of your own)
+In production mode (used on a real device), the gulp build process does a complete build including minification, concatenation etc, and the app runs with 'real' services.
 
 To define configuration parameters for development mode, add them to ```src/js/config/config-prod.json```.
 The ```gulp``` build process will write these values to ```src/js/config/config.js```.
@@ -237,63 +89,11 @@ details.
 For more details on configuring and using development, test and production mode, see the
 [Wiki](https://github.com/leob/ionic-quickstarter/wiki).
 
-#### A note about "ionic upload" and the Ionic View app
-
-Here is a warning for people who use the Ionic View app in conjunction with the ```ionic upload``` command to test
-their app (by the way, I don't really recommend using Ionic View, see my comments about it on the Wiki).
-
-If you do an ```ionic upload```, then by default it will take your app from the ```src``` folder, not from ```www```.
-This is because ```ionic upload``` takes the setting from the ```ionic.project``` file.
-
-So that would mean that you'd see a ***development*** build, not a ***production*** build, when viewing your app in
-Ionic View.
-
-If you don't want this (i.e. if you want a **production** build in Ionic View) then you should (temporarily) change
-```src``` to ```www``` in ```ionic.project```, do a ```gulp build``` and a ```ionic upload```, and then change
-ionic.project back to ```src```.
-
-Note that the same principles apply if you want to test a **production** build under ```ionic serve``` (so not in the
-Ionic View app but in a browser).
-
-However in this case you need to take one extra step to prevent ```ionic serve``` from overwriting your production
-build: you need to run ```ionic serve``` with the ```--nogulp``` argument.
-
-So the workflow then becomes:
-
-* temporarily change ```src``` to ```www``` in ```ionic.project```
-* run the command: ```gulp build```
-* run the command: ```ionic serve --nogulp```
-* when you are done, change ```ionic.project``` back to ```src```
-
-#### A note about the usage of Firebase for authentication
-
-In production mode (if you run on a device with ```ionic build``` or ```ionic run```) then by default Firebase.com will
-be used for login/authentication. This is because in "production mode" the settings in the ```config-prod.json``` file
-are used, which set ```devMode = false``` and ```testMode = false```.
-
-These flags, in turn, cause the user service to point to the Firebase.com implementation (see
-https://github.com/leob/ionic-quickstarter/blob/master/src/js/app/user/services/user.service.js to understand how this
-works).
-
-If you want to run in production mode but do NOT want to use Firebase.com but another implementation (for instance the
-'mock' implementation), then you can do this in two ways:
-
-* modify the values in  ```config-prod.json```: if you set ```devMode = true``` then the "mock" user service
-implementation will be used
-* modify the code of https://github.com/leob/ionic-quickstarter/blob/master/src/js/app/user/services/user.service.js to
-make it use the implementation that you want (for instance the 'mock' implementation)
-
-For more details on configuring Firebase, see the
-[wiki](https://github.com/leob/ionic-quickstarter/wiki/Common-recipes).
-
 #### A note about using the image functionality (Cordova Camera, image cropping)
 
 The image functionality (taking a picture, cropping a picture, and so on) only works on a device, because it needs
 Cordova, and camera hardware obviously. So, you will need to use 'production mode' (that is, ```gulp build``` and
 ```ionic run``` or ```ionic build```).
-
-As explained in the previous section, in production mode authentication will use the Firebase.com implementation by
-default.
 
 If you do not want this, then you can change the values in the ```config-prod.json``` file, or you can change
 the code of https://github.com/leob/ionic-quickstarter/blob/master/src/js/app/user/services/user.service.js (see the
@@ -429,8 +229,6 @@ As an example, here is the default structure (slightly simplified) after install
 │   │   │   │        ├── user.service.js
 │   │   │   │        ├── mock
 │   │   │   │        │   └── user.service.mockImpl.js
-│   │   │   │        └── firebase
-│   │   │   │            └── user.service.firebaseImpl.js
 │   │   │   │      
 │   │   │   app.js
 │   │   │   
@@ -546,9 +344,4 @@ or other services) noticing anything.
 
 The ability to run with 'mock' implementations makes it easy to develop quickly without having to perform a complicated
 production setup, and in test mode, the mock implementations makes running your unit tests a lot faster of course.
-
-## Contributing
-
-Contributions are welcome. For details, see the
-[Contributing](https://github.com/leob/ionic-quickstarter/wiki/Contributing) section on the Wiki.
 
