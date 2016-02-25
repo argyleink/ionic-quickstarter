@@ -1,13 +1,13 @@
 ;(function() {
-"use strict";
+"use strict"
 
 var LogoutCtrl = /*@ngInject*/function ($state, Application) {
-  var vm = this;
+  var vm = this
 
   vm.intro = function () {
-    Application.gotoIntroPage($state);
-  };
-};
+    Application.gotoIntroPage($state)
+  }
+}
 
-appModule('app.auth.login').controller('LogoutCtrl', LogoutCtrl);
-}());
+appModule('app.auth.login').controller('LogoutCtrl', LogoutCtrl)
+}())

@@ -2,7 +2,8 @@
 "use strict"
 
 appModule('app.user')
-  .service('UserServiceMockImpl', function ($q, $log, $rootScope, loggingService, User, AppHooks, StorageService) {
+  .service('UserServiceMockImpl', function ($q, $log, $rootScope, User, AppHooks, StorageService) {
+
     var service
     var currentLoggedinUser   = null
     var userDataLoaded        = false

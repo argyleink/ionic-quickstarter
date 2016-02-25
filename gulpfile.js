@@ -1,47 +1,44 @@
-var gulp            = require('gulp');
-var gutil           = require('gulp-util');
-var bower           = require('bower');
-var concat          = require('gulp-concat');
-var del             = require('del');
-var jshint          = require('gulp-jshint');
-var sass            = require('gulp-sass');
-var minifyCss       = require('gulp-minify-css');
-var sourcemap       = require('gulp-sourcemaps');
-var vinylPaths      = require('vinyl-paths');
-var rename          = require('gulp-rename');
-var ngAnnotate      = require('gulp-ng-annotate');
-var uglify          = require("gulp-uglify");
-var imagemin        = require('gulp-imagemin');
-var htmlreplace     = require('gulp-html-replace');
-var replace         = require('gulp-replace');
-var sh              = require('shelljs');
-var karma           = require('karma').server;
-var ngConstant      = require('gulp-ng-constant');
-var extend          = require('gulp-extend');
-var gulpif          = require('gulp-if');
-var minifyHtml      = require('gulp-minify-html');
-var templateCache   = require('gulp-angular-templatecache');
-var inject          = require('gulp-inject');
+var gulp            = require('gulp')
+  , gutil           = require('gulp-util')
+  , bower           = require('bower')
+  , concat          = require('gulp-concat')
+  , del             = require('del')
+  , jshint          = require('gulp-jshint')
+  , sass            = require('gulp-sass')
+  , minifyCss       = require('gulp-minify-css')
+  , sourcemap       = require('gulp-sourcemaps')
+  , vinylPaths      = require('vinyl-paths')
+  , rename          = require('gulp-rename')
+  , ngAnnotate      = require('gulp-ng-annotate')
+  , uglify          = require("gulp-uglify")
+  , imagemin        = require('gulp-imagemin')
+  , htmlreplace     = require('gulp-html-replace')
+  , replace         = require('gulp-replace')
+  , sh              = require('shelljs')
+  , karma           = require('karma').server
+  , ngConstant      = require('gulp-ng-constant')
+  , extend          = require('gulp-extend')
+  , gulpif          = require('gulp-if')
+  , minifyHtml      = require('gulp-minify-html')
+  , templateCache   = require('gulp-angular-templatecache')
+  , inject          = require('gulp-inject')
 
 // Files
-//
 // Note: change the 'ionicbundle' entry below from 'ionic.bundle.min.js' to 'ionic.bundle.js' to debug "moduleErr"
 // errors in a production build ("gulp build") - see explanation:
-//
 // http://www.chrisgmyr.com/2014/08/debugging-uncaught-error-injectormodulerr-in-angularjs/
-//
 // (the unminified ionic.bundle.js needs to have the extra console.log statement as explained in the article)
-//
+
 var files = {
   jsbundle:       'app.bundle.min.js',
   appcss:         'app.css',
   ionicappmincss: 'ionic.app.min.css',
   ionicbundle:    'ionic.bundle.min.js'    // change to 'ionic.bundle.js' for debugging moduleErr errors
-};
+}
 // Paths
 var paths = {
   sass: ['./scss/**/*.scss'],
-  css: ['./src/css/**/*.css'],
+  css:  ['./src/css/**/*.css'],
   scripts: [
     './src/js/**/*.js',
     '!./src/js/lib/ng-img-crop-customized/ng-img-crop.js',   /* exclude ng-img-crop.js: handled separately */
@@ -80,46 +77,39 @@ var paths = {
     './src/js/lib/logentries/le.min.js'
     ],
   dist: ['./www']
-};
+}
 
-//
 // === TOP LEVEL TASKS (invoke with "gulp <task-name>") ===
-//
-
 // default task for DEV
 
-gulp.task('default', ['dev-config', 'dev-sass', 'inject-index']);
+gulp.task('default', ['dev-config', 'dev-sass', 'inject-index'])
 
 // watch task for DEV
-//
-// NOTE: inject-index does not run automatically within the "watch" task - so, if you add or remove Javascript files
-// and you want to inject them into index.html, then you just need to restart "ionic serve" so that the "default" task
-// can re-run 'inject-index'.
+// NOTE: inject-index does not run automatically within the "watch" task - so, if you add or remove Javascript files and you want to inject them into index.html, then you just need to restart "ionic serve" so that the "default" task can re-run 'inject-index'.
 
 gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['dev-sass']);
-});
+  gulp.watch(paths.sass, ['dev-sass'])
+})
 
 // karma tasks for TEST
 
 var runtest = function (single) {
   karma.start({
     configFile: __dirname + '/karma.conf.js',
-    singleRun: single,
-    autoWatch: !single
-  });
-};
+    singleRun:  single,
+    autoWatch:  !single
+  })
+}
 
 gulp.task('test', function (done) {
-  runtest(false), done;
-});
+  runtest(false), done
+})
 
 gulp.task('test-single', function (done) {
-  runtest(true), done;
-});
+  runtest(true), done
+})
 
 // build task for PROD
-
 // Note: use before 'ionic build' or 'ionic run'.
 // See: https://github.com/driftyco/ionic-cli/issues/345#issuecomment-88659079
 gulp.task('build', [
@@ -132,34 +122,30 @@ gulp.task('build', [
   'inject-index', 
   'index', 
   'copy'
-]);
+])
 
 // utility tasks for DEV/PROD/TEST (whichever)
-
 gulp.task('jshint', function() {
   gulp.src(paths.scripts)
     .pipe(jshint())
-    .pipe(jshint.reporter('default'));
-});
+    .pipe(jshint.reporter('default'))
+})
 
-//
 // === CHILD TASKS ===
-//
-
 // use 'del' instead of 'clean', see: https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md
 gulp.task('clean', function (cb) {
   del([
     paths.dist + '/**/*'
-  ], cb);
-});
+  ], cb)
+})
 
 var dosass = function(minify, sourcemaps, done) {
   gulp.src('./scss/ionic.app.scss')
   .pipe(sass({includePaths: [ 'src/lib/ionic/scss/' ]}))
   // this keeps the gulp build from crashing when there are errors in your SASS file
   .on("error", function(err) {
-    console.log(err.toString());
-    this.emit("end");
+    console.log(err.toString())
+    this.emit("end")
   })
   .pipe(gulp.dest(paths.dist + '/css/'))
   .pipe(gulpif(sourcemaps, sourcemap.init()))
@@ -171,38 +157,39 @@ var dosass = function(minify, sourcemaps, done) {
   .pipe(gulpif(sourcemaps, sourcemap.write()))
   .pipe(gulpif(minify, rename({ extname: '.min.css' })))
   .pipe(gulp.dest('./src/css/'))
-  .on('end', done);
-};
+  .on('end', done)
+}
 
 gulp.task('sass', ['clean'], function(done) {
   dosass(
     true,
     false,  // set to TRUE to get source maps
     done
-  );
-});
+  )
+})
 
 gulp.task('dev-sass', function(done) {
   dosass(
     false,
     false,
     done
-  );
-});
+  )
+})
 
 // scripts - clean dist dir then annotate, uglify, concat
 gulp.task('scripts', ['clean'], function() {
   gulp.src(paths.scripts)
     .pipe(ngAnnotate({
-      remove: true,
-      add: true,
-      single_quotes: true,
-      regexp: "appModule(.*)$"  /* NOTE: this makes ngAnnotate work right even when defining modules with "appModule(...)" instead of "angular.module()" */
+      remove:         true,
+      add:            true,
+      single_quotes:  true,
+      /* NOTE: this makes ngAnnotate work right even when defining modules with "appModule(...)" instead of "angular.module()" */
+      regexp:         "appModule(.*)$"  
     }))
     .pipe(uglify())
     .pipe(concat(files.jsbundle))
-    .pipe(gulp.dest(paths.dist + '/js'));
-});
+    .pipe(gulp.dest(paths.dist + '/js'))
+})
 
 var config = function(src, dest) {
   gulp.src(['src/js/config/config-base.json', src])
@@ -211,26 +198,26 @@ var config = function(src, dest) {
       deps: false
     }))
     .pipe(rename(function(path) {
-      path.basename = 'config';
-      path.extname = '.js';
+      path.basename   = 'config'
+      path.extname    = '.js'
     }))
-    .pipe(gulp.dest(dest));
-};
+    .pipe(gulp.dest(dest))
+}
 
 gulp.task('prod-config', ['clean'], function() {
   config('src/js/config/config-prod.json', paths.dist + '/js/config')
-});
+})
 
 gulp.task('dev-config', function() {
   config('src/js/config/config-dev.json', 'src/js/config')
-});
+})
 
 // imagemin images and output them in dist
 gulp.task('imagemin', ['clean'], function() {
   gulp.src(paths.images)
     .pipe(imagemin())
-    .pipe(gulp.dest(paths.dist + '/img'));
-});
+    .pipe(gulp.dest(paths.dist + '/img'))
+})
 
 // inspired by: http://forum.ionicframework.com/t/could-i-set-up-ionic-in-such-a-way-that-it-downloads-an-entire-spa-upfront/7565/5
 gulp.task('templates', ['clean', 'scripts'], function() {
@@ -238,59 +225,57 @@ gulp.task('templates', ['clean', 'scripts'], function() {
     .pipe(minifyHtml({empty: true}))
     .pipe(templateCache({
       standalone: true,
-      root: 'js'
+      root:       'js'
     }))
-    .pipe(gulp.dest(paths.dist + '/js'));
-});
+    .pipe(gulp.dest(paths.dist + '/js'))
+})
 
 // inject javascript paths into index-template.html, producing index.html
 gulp.task('inject-index', function() {
   gulp.src(paths.indexTemplate)
     .pipe(inject(
-      gulp.src(paths.injectedScripts,
-        {read: false}), {relative: true}))
+      gulp.src(paths.injectedScripts, {read: false}), {relative: true}))
     .pipe(rename(function(path) {
-      path.basename = 'index';
-      path.extname = '.html';
+      path.basename   = 'index'
+      path.extname    = '.html'
     }))
-    .pipe(gulp.dest('./src/'));
-});
+    .pipe(gulp.dest('./src/'))
+})
 
 // prepare index.html for dist - i.e. using minimized files
 gulp.task('index', ['clean', 'inject-index'], function() {
   gulp.src(paths.index)
     .pipe(htmlreplace({
-      'sass': 'css/ionic.app.min.css',
-      'css': 'css/app.min.css',
-      'js': 'js/app.bundle.min.js',
-      'ionic': 'lib/ionic/js/' + files.ionicbundle
+      'sass':   'css/ionic.app.min.css',
+      'css':    'css/app.min.css',
+      'js':     'js/app.bundle.min.js',
+      'ionic':  'lib/ionic/js/' + files.ionicbundle
     }))
     // https://www.airpair.com/ionic-framework/posts/production-ready-apps-with-ionic-framework
     .pipe(replace(/<body /, '<body ng-strict-di '))
-    .pipe(gulp.dest(paths.dist + '/.'));
-});
+    .pipe(gulp.dest(paths.dist + '/.'))
+})
 
 // copy all other files to dist directly
 gulp.task('copy', ['clean', 'sass'], function() {
 
   gulp.src(paths.ionicfonts)
-    .pipe(gulp.dest(paths.dist + '/lib/ionic/fonts'));
+    .pipe(gulp.dest(paths.dist + '/lib/ionic/fonts'))
 
   // 'base' option, see: http://www.levihackwith.com/how-to-make-gulp-copy-a-directory-and-its-contents/
   gulp.src(paths.lib, {base: './src/lib'})
-    .pipe(gulp.dest(paths.dist + '/lib'));
+    .pipe(gulp.dest(paths.dist + '/lib'))
 
   gulp.src('./src/css/' + files.ionicappmincss)
-    .pipe(gulp.dest(paths.dist + '/css'));
+    .pipe(gulp.dest(paths.dist + '/css'))
 
   gulp.src(paths.locales, {base: './src'})
     .pipe(gulp.dest(paths.dist + '/.')
-  );
-});
+  )
+})
 
-//
+
 // === OTHER TASKS (used by Ionic CLI ?) ===
-//
 
 gulp.task('git-check', function(done) {
   if (!sh.which('git')) {
@@ -299,19 +284,15 @@ gulp.task('git-check', function(done) {
       '\n  Git, the version control system, is required to download Ionic.',
       '\n  Download git here:', gutil.colors.cyan('http://git-scm.com/downloads') + '.',
       '\n  Once git is installed, run \'' + gutil.colors.cyan('gulp install') + '\' again.'
-    );
-    process.exit(1);
+    )
+    process.exit(1)
   }
-  done();
-});
+  done()
+})
 
 gulp.task('install', ['git-check'], function() {
   return bower.commands.install()
     .on('log', function(data) {
-      gutil.log('bower', gutil.colors.cyan(data.id), data.message);
-    });
-});
-
-//
-// END
-//
+      gutil.log('bower', gutil.colors.cyan(data.id), data.message)
+    })
+})
