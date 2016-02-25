@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  ionic:
+    build: .
+    tty: true
+    stdin_open: true
+    privileged: true
+    volumes: 
+      - ./scss:/MyApp/scss
+      - ./test:/MyApp/test
+      - ./www:/MyApp/www
+      - /dev/bus/usb
+    ports:
+      - "8100:8100"
+      - "35729:35729"
+      - "9876"
