@@ -5,13 +5,13 @@
       "routerDefaultState": "app.auth.main.dash"
     },
     "FirebaseConfiguration": {
-      "url": "https://your-firebase-app.firebaseio.com",
-      "debug": false
+      "url":    "https://your-firebase-app.firebaseio.com",
+      "debug":  false
     },
     "TwitterReauthentication": {
-      "useReauthenticationHack": "false",
-      "consumerKey": "TWITTER_CONSUMER_KEY",
-      "consumerSecretKey": "TWITTER_CONSUMER_SECRET"
+      "useReauthenticationHack":  "false",
+      "consumerKey":              "TWITTER_CONSUMER_KEY",
+      "consumerSecretKey":        "TWITTER_CONSUMER_SECRET"
     }
   }
 }

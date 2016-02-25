@@ -1,12 +1,12 @@
 ;(function() {
-"use strict";
+"use strict"
 
 appModule('app.mainPage')
   .config(function ($stateProvider) {
     $stateProvider
       .state('app.auth.main', {
-        url: "/main",
-        abstract: true,
+        url:        "/main",
+        abstract:   true,
         views: {
           'menuContent@app': {
             templateUrl: "js/app/mainPage/tabs.html"
@@ -18,8 +18,8 @@ appModule('app.mainPage')
         url: '/dash',
         views: {
           'main-dash': {
-            templateUrl: 'js/app/mainPage/dash.html',
-            controller: 'DashCtrl as vm'
+            templateUrl:  'js/app/mainPage/dash.html',
+            controller:   'DashCtrl as vm'
           }
         }
       })
@@ -27,8 +27,8 @@ appModule('app.mainPage')
         url: '/chats',
         views: {
           'main-chats': {
-            templateUrl: 'js/app/mainPage/chats.html',
-            controller: 'ChatsCtrl as vm'
+            templateUrl:  'js/app/mainPage/chats.html',
+            controller:   'ChatsCtrl as vm'
           }
         }
       })
@@ -36,8 +36,8 @@ appModule('app.mainPage')
         url: '/chats/:chatId',
         views: {
           'main-chats': {
-            templateUrl: 'js/app/mainPage/chatDetail.html',
-            controller: 'ChatDetailCtrl as vm'
+            templateUrl:  'js/app/mainPage/chatDetail.html',
+            controller:   'ChatDetailCtrl as vm'
           }
         }
       })
@@ -45,11 +45,10 @@ appModule('app.mainPage')
         url: '/account',
         views: {
           'main-account': {
-            templateUrl: 'js/app/mainPage/account.html',
-            controller: 'AccountCtrl as vm'
+            templateUrl:  'js/app/mainPage/account.html',
+            controller:   'AccountCtrl as vm'
           }
         }
-      });
+      })
   })
-;
-}());
+}())

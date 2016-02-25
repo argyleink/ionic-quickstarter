@@ -1,16 +1,16 @@
 ;(function () {
-  "use strict";
+  "use strict"
 
   var IntroHeader = function () {
     return ({
       restrict: 'E',
-      replace: true,
+      replace:  true,
       scope: {
         img: '@'
       },
       templateUrl: 'js/app/intro/intro-header.html'
-    });
-  };
+    })
+  }
 
-  appModule('app.intro').directive('introHeader', IntroHeader);
-}());
+  appModule('app.intro').directive('introHeader', IntroHeader)
+}())

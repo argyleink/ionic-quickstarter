@@ -1,5 +1,5 @@
 ;(function() {
-"use strict";
+"use strict"
 
 appModule('app.intro')
   .config(function ($stateProvider) {
@@ -8,10 +8,10 @@ appModule('app.intro')
         url: '/intro',
         views: {
           'menuContent@app': {
-            templateUrl: 'js/app/intro/intro.html',
-            controller: 'IntroCtrl as vm'
+            templateUrl:  'js/app/intro/intro.html',
+            controller:   'IntroCtrl as vm'
           }
         }
-      });
-  });
-}());
+      })
+  })
+}())

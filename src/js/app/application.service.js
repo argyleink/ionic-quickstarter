@@ -1,294 +1,274 @@
 ;(function () {
-  "use strict";
+  "use strict"
 
   angular.module('app')
-
-    //
     // This service provides a set of convenience/utility methods that you can use throughout your app.
-    //
-    .factory('Application', function (StorageService, UserService, APP, Stopwatch, $log, $ionicPlatform, $ionicHistory,
-                                      $ionicLoading, $ionicContentBanner, $translate, $timeout, $ionicScrollDelegate,
-                                      $rootScope, $ionicPopup, $cordovaToast) {
+    .factory('Application', function (StorageService, UserService, APP, Stopwatch, $log, $ionicPlatform, $ionicHistory, $ionicLoading, $ionicContentBanner, $translate, $timeout, $ionicScrollDelegate, $rootScope, $ionicPopup, $cordovaToast) {
 
-
-      var deviceReady = false;
-      var ionicPlatformReady = false;
-
-      var appMessage = null;
-      var appState = {};
+      var deviceReady         = false
+        , ionicPlatformReady  = false
+        , appMessage          = null
+        , appState            = {}
 
       var init = function () {
-        var w = logStarted('Application#init');
-
-        UserService.init();
-
-        logFinished(w);
-      };
+        var w = logStarted('Application#init')
+        UserService.init()
+        logFinished(w)
+      }
 
       var getStartPage = function () {
-        var state = null;
-
-        //
+        var state = null
         // "initial page" logic - this determines the first page to be shown by the app.
-        //
         // This way, we can guide the user through the onboarding process.
-        //
 
         if (isInitialRun()) {
-          state = 'app.intro';
+          state = 'app.intro'
         } else if (!isUserLoggedIn()) {
-          state = 'login';
+          state = 'login'
         } else {
-          state = APP.routerDefaultState;
+          state = APP.routerDefaultState
         }
 
-        $log.info("Application#getStartPage - state = " + state);
+        $log.info("Application#getStartPage - state = " + state)
 
-        return {state: state, stateParams: null};
-      };
+        return {
+          state:        state,
+          stateParams:  null
+        }
+      }
 
       var gotoPage = function ($state, page, params, disableBackbutton, clearHistory) {
-
         // workaround for undesirable behavior when Ionic is showing the back button when we don't want it to
         if (disableBackbutton) {
           $ionicHistory.nextViewOptions({
             disableBack: true
-          });
+          })
         }
 
         if (clearHistory) {
-          $ionicHistory.clearHistory();
+          $ionicHistory.clearHistory()
         }
 
-        $state.go(page, params || {});
-      };
+        $state.go(page, params || {})
+      }
 
       var gotoIntroPage = function ($state) {
-        gotoPage($state, "app.intro", null, true);
-      };
+        gotoPage($state, "app.intro", null, true)
+      }
 
       var gotoUserProfilePage = function ($state, onboarding) {
-        gotoPage($state, 'app.auth.userProfile', onboarding ? {mode: 'onboarding'} : {}, true, true);
-      };
+        gotoPage($state, 'app.auth.userProfile', onboarding ? {mode: 'onboarding'} : {}, true, true)
+      }
 
       var gotoStartPage = function ($state, clearHistory) {
-        var page = getStartPage();
-
+        var page = getStartPage()
         // After redirecting the user to the start page we want to make sure we don't show a back-button.
         // This is why we preemptively clear the Ionic view history.
-        gotoPage($state, page.state, page.stateParams, true, clearHistory);
-      };
+        gotoPage($state, page.state, page.stateParams, true, clearHistory)
+      }
 
       var isInitialRun = function () {
-        return StorageService.get("initialRun", "true") == "true";
-      };
+        return StorageService.get("initialRun", "true") == "true"
+      }
 
       var setInitialRun = function (initial) {
-        StorageService.set("initialRun", initial ? "true" : "false");
-      };
+        StorageService.set("initialRun", initial ? "true" : "false")
+      }
 
       var isUserLoggedIn = function () {
-        return UserService.currentUser() !== null;
-      };
+        return UserService.currentUser() !== null
+      }
 
       var showLoading = function (showBackdrop) {
         $ionicLoading.show({
-          content: '',
-          animation: 'fade-in',
+          content:      '',
+          animation:    'fade-in',
           showBackdrop: showBackdrop,
-          maxWidth: 200,
-          showDelay: 0
-        });
-      };
+          maxWidth:     200,
+          showDelay:    0
+        })
+      }
 
       var hideLoading = function () {
-        $ionicLoading.hide();
-      };
+        $ionicLoading.hide()
+      }
 
       var resetForm = function (vm) {
-        vm.form.$setPristine();
-        vm.error = {};
-      };
+        vm.form.$setPristine()
+        vm.error = {}
+      }
 
       var getLogger = function (context) {
-        return $log.getLogger(context);
-      };
+        return $log.getLogger(context)
+      }
 
       var setMessage = function (message) {
-        appMessage = message;
-      };
+        appMessage = message
+      }
 
       var getMessage = function () {
-        var message = appMessage;
-        appMessage = null;
+        var message = appMessage
+        appMessage = null
 
-        return message;
-      };
+        return message
+      }
 
       var setState = function (key, value) {
-        appState[key] = value;
-      };
+        appState[key] = value
+      }
 
       var getState = function (key) {
-        var value = appState[key];
-
-        return value;
-      };
+        return appState[key]
+      }
 
       var getAndClearState = function (key) {
-        var value = appState[key];
-        delete appState[key];
+        var value = appState[key]
+        delete appState[key]
 
-        return value;
-      };
+        return value
+      }
 
       var isObjectEmpty = function (object) {
-        if (!object) {
-          return true;
-        }
+        if (!object) return true
 
         for (var key in object) {
           if (object.hasOwnProperty(key)) {
-            return false;
+            return false
           }
         }
-        return true;
-      };
+
+        return true
+      }
 
       var isObjectNotEmpty = function (object) {
-        return !isObjectEmpty(object);
-      };
+        return !isObjectEmpty(object)
+      }
 
       var contentBannerInit = function (vm, controllerScope) {
-        vm.closeContentBanner = null;
+        vm.closeContentBanner = null
 
         // before we leave the view then close/destroy the ionic-content-banner, if any
         controllerScope.$on('$ionicView.beforeLeave', function () {
           if (vm.closeContentBanner) {
-            vm.closeContentBanner();
-            vm.closeContentBanner = null;
+            vm.closeContentBanner()
+            vm.closeContentBanner = null
           }
-        });
-      };
+        })
+      }
 
       var contentBannerShow = function (vm, keys, intervalMs, autoCloseMs, type, param) {
-        var messageKeys;
-        var messageParam;
+        var messageKeys
+          , messageParam
 
         if (typeof keys === 'object' && !Array.isArray(keys)) {
-          messageKeys = keys.keys;
-          messageParam = keys.param;
+          messageKeys = keys.keys
+          messageParam = keys.param
         } else {
-          messageKeys = Array.isArray(keys) ? keys : [keys];
-          messageParam = param;
+          messageKeys = Array.isArray(keys) ? keys : [keys]
+          messageParam = param
         }
 
-        if (!type) {
-          type = 'info';
-        }
+        if (!type) type = 'info'
 
         // SCROLL TO THE TOP OF THE SCREEN, OTHERWISE THE CONTENT BANNER MIGHT NOT BE VISIBLE ! (because it gets shown
         // at the top of the Ionic View). Wrap it in a 'timeout' as per Stackoverflow:
         // stackoverflow.com/questions/29247556/ionic-scrolltop-cannot-read-property-scrollto-of-null-still-exists-in-1-0-0
 
         $timeout(function() {
-          $ionicScrollDelegate.scrollTop();
-        }, 0);
+          $ionicScrollDelegate.scrollTop()
+        }, 0)
 
-        if (!intervalMs) {
-          intervalMs = 3000;
-        }
+        if (!intervalMs) intervalMs = 3000
 
         if (autoCloseMs === undefined) {
-          autoCloseMs = intervalMs * messageKeys.length;
+          autoCloseMs = intervalMs * messageKeys.length
         }
 
         $translate(messageKeys, messageParam).then(function (translations) {
-
-          var texts = [];
+          var texts = []
 
           Object.keys(translations).forEach(function (key) {
-            texts.push(translations[key]);
-          });
+            texts.push(translations[key])
+          })
 
           vm.closeContentBanner = $ionicContentBanner.show({
-            text: texts,
-            autoClose: autoCloseMs,
-            interval: intervalMs,
-            type: type
-          });
-        });
-      };
+            text:       texts,
+            autoClose:  autoCloseMs,
+            interval:   intervalMs,
+            type:       type
+          })
+        })
+      }
 
       var errorMessage = function (vm, key, vars) {
         $translate(key, vars || {}).then(function (translation) {
-          vm.error.message = translation;
-        });
-      };
+          vm.error.message = translation
+        })
+      }
 
       var clearErrorMessage = function (vm) {
-        vm.error.message = null;
-      };
+        vm.error.message = null
+      }
 
       var logStarted = function (context, message) {
-        var stopwatch = new Stopwatch(context);
-        stopwatch.start();
+        var stopwatch = new Stopwatch(context)
+        stopwatch.start()
 
-        var msg = context ? context + ' - ' : '';
-        msg = msg + (message || 'STARTED');
+        var msg = context ? context + ' - ' : ''
+        msg = msg + (message || 'STARTED')
 
-        $log.info(msg);
+        $log.info(msg)
 
-        return stopwatch;
-      };
+        return stopwatch
+      }
 
       var logFinished = function (stopwatch, message) {
-        logEnded($log.info, stopwatch, message);
-      };
+        logEnded($log.info, stopwatch, message)
+      }
 
       var logError = function (stopwatch, message) {
-        logEnded($log.error, stopwatch, message);
-      };
+        logEnded($log.error, stopwatch, message)
+      }
 
       function logEnded(fn, stopwatch, message) {
-        stopwatch.stop();
+        stopwatch.stop()
 
-        var context = stopwatch.context;
-        var msg = context ? context + ' - ' : '';
-        msg = msg + (message || 'FINISHED');
+        var context = stopwatch.context
+        var msg = context ? context + ' - ' : ''
+        msg = msg + (message || 'FINISHED')
 
-        fn(msg + ' - DURATION: ' + stopwatch.fmtTime());
+        fn(msg + ' - DURATION: ' + stopwatch.fmtTime())
       }
 
       var getEmail = function () {
-        return StorageService.get("email", null);
-      };
+        return StorageService.get("email", null)
+      }
 
       var setEmail = function (value) {
-        StorageService.set("email", value);
-      };
+        StorageService.set("email", value)
+      }
 
       var isDeviceReady = function () {
-        return deviceReady;
-      };
+        return deviceReady
+      }
 
       var setDeviceReady = function (ready) {
-        deviceReady = ready;
-      };
+        deviceReady = ready
+      }
 
       var isIonicPlatformReady = function () {
-        return ionicPlatformReady;
-      };
+        return ionicPlatformReady
+      }
 
       var setIonicPlatformReady = function (ready) {
-        ionicPlatformReady = ready;
-      };
+        ionicPlatformReady = ready
+      }
 
-      var deregisterBackbuttonHandler = null;
+      var deregisterBackbuttonHandler = null
 
       var registerBackbuttonHandler = function () {
 
-        unregisterBackbuttonHandler();
+        unregisterBackbuttonHandler()
 
         // Prevent the Android hardware back button from exiting the app 'unvoluntarily' - ask the user to confirm; see:
         //
@@ -302,90 +282,87 @@
         deregisterBackbuttonHandler = $ionicPlatform.registerBackButtonAction(function (event) {
 
           if ($ionicHistory.backView() === null) {  // no more previous screen in the history stack, so "back" would exit
-            var key = 'exit-popup.';
+            var key = 'exit-popup.'
 
-            $translate(key + 'text', {you: $rootScope._y}).then(function (translation) {
-
+            $translate(key + 'text', {you: $rootScope._y})
+            .then(function (translation) {
               $translate([key + 'title', key + 'ok-button', key + 'cancel-button']).then(function (translations) {
 
                 $ionicPopup.confirm({
-                  title: translations[key + 'title'],
-                  template: translation,
-                  cssClass: 'info-popup',
+                  title:      translations[key + 'title'],
+                  template:   translation,
+                  cssClass:   'info-popup',
                   cancelText: translations[key + 'cancel-button'],
-                  okText: translations[key + 'ok-button']
+                  okText:     translations[key + 'ok-button']
                 }).then(function (res) {
-                  if (res) {
-                    ionic.Platform.exitApp();
-                  }
-                });
-
-              });
-            });
+                  if (res) ionic.Platform.exitApp()
+                })
+              })
+            })
 
           } else {
-            $ionicHistory.goBack();
+            $ionicHistory.goBack()
           }
-        }, 100);  // 100 = previous view
+        }, 100)  // 100 = previous view
 
-        return deregisterBackbuttonHandler;
-      };
+        return deregisterBackbuttonHandler
+      }
 
       var unregisterBackbuttonHandler = function () {
         if (deregisterBackbuttonHandler) {
-          deregisterBackbuttonHandler();
-          deregisterBackbuttonHandler = null;
+          deregisterBackbuttonHandler()
+          deregisterBackbuttonHandler = null
         }
-      };
+      }
 
       var showToast = function (message) {
         if (window.cordova) {
           $cordovaToast.showLongCenter(message).then(function (success) {
-            $log.debug("Success: showToast('" + message + "')");
+            $log.debug("Success: showToast('" + message + "')")
           }, function (error) {
-            $log.error("Error: showToast('" + message + "'), error: " + JSON.stringify(error));
-          });
+            $log.error("Error: showToast('" + message + "'), error: " + JSON.stringify(error))
+          })
         } else {
-          $log.warn("NOTE - not running on device: showToast('" + message + "')");
+          $log.warn("NOTE - not running on device: showToast('" + message + "')")
         }
       }
 
       return {
-        init: init,
-        isInitialRun: isInitialRun,
-        setInitialRun: setInitialRun,
-        isUserLoggedIn: isUserLoggedIn,
-        isDeviceReady: isDeviceReady,
-        setDeviceReady: setDeviceReady,
-        isIonicPlatformReady: isIonicPlatformReady,
-        setIonicPlatformReady: setIonicPlatformReady,
-        registerBackbuttonHandler: registerBackbuttonHandler,
-        unregisterBackbuttonHandler: unregisterBackbuttonHandler,
-        gotoPage: gotoPage,
-        gotoStartPage: gotoStartPage,
-        gotoIntroPage: gotoIntroPage,
-        gotoUserProfilePage: gotoUserProfilePage,
-        showLoading: showLoading,
-        hideLoading: hideLoading,
-        resetForm: resetForm,
-        getLogger: getLogger,
-        setMessage: setMessage,
-        getMessage: getMessage,
-        setState: setState,
-        getState: getState,
-        getAndClearState: getAndClearState,
-        isObjectEmpty: isObjectEmpty,
-        isObjectNotEmpty: isObjectNotEmpty,
-        contentBannerInit: contentBannerInit,
-        contentBannerShow: contentBannerShow,
-        errorMessage: errorMessage,
-        clearErrorMessage: clearErrorMessage,
-        logStarted: logStarted,
-        logFinished: logFinished,
-        logError: logError,
-        getEmail: getEmail,
-        setEmail: setEmail,
-        showToast: showToast
-      };
-    });
-}());
+        init:                         init,
+        isInitialRun:                 isInitialRun,
+        setInitialRun:                setInitialRun,
+        isUserLoggedIn:               isUserLoggedIn,
+        isDeviceReady:                isDeviceReady,
+        setDeviceReady:               setDeviceReady,
+        isIonicPlatformReady:         isIonicPlatformReady,
+        setIonicPlatformReady:        setIonicPlatformReady,
+        registerBackbuttonHandler:    registerBackbuttonHandler,
+        unregisterBackbuttonHandler:  unregisterBackbuttonHandler,
+        gotoPage:                     gotoPage,
+        gotoStartPage:                gotoStartPage,
+        gotoIntroPage:                gotoIntroPage,
+        gotoUserProfilePage:          gotoUserProfilePage,
+        showLoading:                  showLoading,
+        hideLoading:                  hideLoading,
+        resetForm:                    resetForm,
+        getLogger:                    getLogger,
+        setMessage:                   setMessage,
+        getMessage:                   getMessage,
+        setState:                     setState,
+        getState:                     getState,
+        getAndClearState:             getAndClearState,
+        isObjectEmpty:                isObjectEmpty,
+        isObjectNotEmpty:             isObjectNotEmpty,
+        contentBannerInit:            contentBannerInit,
+        contentBannerShow:            contentBannerShow,
+        errorMessage:                 errorMessage,
+        clearErrorMessage:            clearErrorMessage,
+        logStarted:                   logStarted,
+        logFinished:                  logFinished,
+        logError:                     logError,
+        getEmail:                     getEmail,
+        setEmail:                     setEmail,
+        showToast:                    showToast
+      }
+    })
+}())

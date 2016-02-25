@@ -1,5 +1,5 @@
 ;(function() {
-"use strict";
+"use strict"
 
 appModule('app.mainPage')
 
@@ -33,23 +33,23 @@ appModule('app.mainPage')
     name: 'Mike Harrington',
     lastText: 'This is wicked good ice cream.',
     face: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png'
-  }];
+  }]
 
   return {
     all: function() {
-      return chats;
+      return chats
     },
     remove: function(chat) {
-      chats.splice(chats.indexOf(chat), 1);
+      chats.splice(chats.indexOf(chat), 1)
     },
     get: function(chatId) {
       for (var i = 0; i < chats.length; i++) {
         if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
+          return chats[i]
         }
       }
-      return null;
+      return null
     }
-  };
-});
-}());
+  }
+})
+}())

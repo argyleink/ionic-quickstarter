@@ -1,5 +1,5 @@
 // Use this variable to maintain a list of registered modules (see 'module' function below)
-var modules = {};
+var modules = {}
 
 //
 // This function is a simple wrapper around "angular.module(...)".
@@ -17,12 +17,12 @@ var modules = {};
 // NOTE: practically speaking this is only useful if you don't have to declare dependencies for the module.
 //
 var appModule = function(moduleName, deps) {
-  var mod = modules[moduleName];
+  var mod = modules[moduleName]
 
   if (!mod) {
-    mod = angular.module(moduleName, deps || []);
-    modules[moduleName] = mod;
+    mod = angular.module(moduleName, deps || [])
+    modules[moduleName] = mod
   }
 
-  return mod;
-};
+  return mod
+}
