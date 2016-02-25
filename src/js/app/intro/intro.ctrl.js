@@ -1,4 +1,4 @@
-;(function() {
+(function() {
 "use strict"
 
 var IntroCtrl = /*@ngInject*/function ($scope, $state, $ionicSlideBoxDelegate, $ionicScrollDelegate, Application) {

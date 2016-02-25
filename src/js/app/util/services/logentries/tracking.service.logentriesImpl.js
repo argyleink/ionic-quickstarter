@@ -1,4 +1,4 @@
-;(function() {
+(function() {
 "use strict"
 // Track an event using the Logentries service.
 // NOTE: for this to work, edit the "index-template.html" file, uncomment the following 4 lines, and substitute your Logentries token into the "LE.init" call:
@@ -12,11 +12,14 @@ appModule('app.util')
       // Note: object "LE" is defined by logentries/le.min.js
       if (logLevel === 'ERROR') {
         LE.error(message)
-      } else if (logLevel === 'WARN') {
+      } 
+      else if (logLevel === 'WARN') {
         LE.warn(message)
-      } else if (logLevel === 'INFO') {
+      } 
+      else if (logLevel === 'INFO') {
         LE.info(message)
-      } else {
+      } 
+      else {
         LE.log(message)
       }
     }

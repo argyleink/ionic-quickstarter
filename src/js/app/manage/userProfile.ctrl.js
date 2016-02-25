@@ -1,4 +1,4 @@
-;(function () {
+(function () {
   "use strict"
 
   var UserProfileCtrl = /*@ngInject*/function ($scope, $rootScope, $state, $timeout, $ionicModal, $ionicActionSheet, $translate, $q, $stateParams, Application, ImageService, FileManager, UserService) {
@@ -335,16 +335,4 @@
   }
 
   appModule('app.manage').controller('UserProfileCtrl', UserProfileCtrl)
-    .config(function ($stateProvider) {
-      $stateProvider
-        .state('app.auth.userProfile', {
-          url: '/userProfile',
-          views: {
-            'menuContent@app': {
-              templateUrl: 'js/app/manage/userProfile.html',
-              controller: 'UserProfileCtrl as vm'
-            }
-          }
-        })
-    })
 }())

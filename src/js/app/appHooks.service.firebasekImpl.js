@@ -1,4 +1,4 @@
-;(function() {
+(function() {
 "use strict"
 // TODO: Kinto
 // Q: needed?

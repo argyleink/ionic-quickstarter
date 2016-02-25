@@ -1,4 +1,4 @@
-;(function() {
+(function() {
   "use strict"
 
   // A directive that displays an indicator to alert the user to the fact that a certain item has not ben entered yet.

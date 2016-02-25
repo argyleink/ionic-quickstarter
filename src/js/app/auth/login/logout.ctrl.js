@@ -1,4 +1,4 @@
-;(function() {
+(function() {
 "use strict"
 
 var LogoutCtrl = /*@ngInject*/function ($state, Application) {

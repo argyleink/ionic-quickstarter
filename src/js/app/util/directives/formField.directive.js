@@ -1,5 +1,5 @@
 /*jshint sub:true*/
-;(function() {
+(function() {
   "use strict"
 
   // A directive that can be used on an input or textarea element to indicate the form field associated with the input. This is then used to highlight the label (using CSS classes) when the field becomes 'valid' or 'invalid'.

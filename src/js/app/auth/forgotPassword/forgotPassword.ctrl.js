@@ -1,4 +1,4 @@
-;(function() {
+(function() {
 "use strict"
 
 var ForgotPasswordCtrl = /*@ngInject*/function ($scope, $state, $translate, Application, UserService) {

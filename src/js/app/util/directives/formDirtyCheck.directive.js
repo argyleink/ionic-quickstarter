@@ -1,4 +1,4 @@
-;(function () {
+(function () {
   "use strict"
 
   // Prevent the user from losing data by checking the from's "dirty" status before navigating away from the page.

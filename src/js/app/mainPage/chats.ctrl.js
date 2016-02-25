@@ -1,4 +1,4 @@
-;(function() {
+(function() {
 "use strict"
 
 var ChatsCtrl = /*@ngInject*/function (Application, $scope, Chats) {

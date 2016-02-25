@@ -1,4 +1,4 @@
-;(function() {
+(function() {
   "use strict"
 
   appModule('app.util').directive('formErrors', function() {

@@ -1,4 +1,4 @@
-;(function() {
+(function() {
   "use strict"
   // Enhance the built-in angularjs logger with some extra features (e.g. printing the timestamp, and logging the number of AngularJS watchers in debug mode).
   appModule('app.util')

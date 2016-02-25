@@ -1,4 +1,4 @@
-;(function() {
+(function() {
 "use strict"
 // A utility service with Cordova Oauth helper funtions (currently only used for Twitter Oauth flows). This code was copied and amended from src/lib/ngCordova/dist/ng-cordovajs ("oauth.providers" module, "$cordovaOauth" service).
 angular.module('app.oauthUtil', ["oauth.utils"])

@@ -1,4 +1,4 @@
-;(function () {
+(function () {
   "use strict"
   // Main application script
   // Declare the 'app.config' module, this is because config.js is generated and doesn't the app.config module itself

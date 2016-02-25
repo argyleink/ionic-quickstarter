@@ -1,4 +1,4 @@
-;(function() {
+(function() {
 "use strict"
 // Wrapper service for local storage.
 // This could be overridden/reimplemented to use another storage mechanism e.g. SQLite or PouchDB.

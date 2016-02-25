@@ -1,4 +1,4 @@
-;(function() {
+(function() {
 "use strict"
 // A service exposing methods which function as app-specific "hooks" (callbacks) to customize the behavior of generic services for that app. The "hook" methods are called from generic services.
 appModule('app.hooks')

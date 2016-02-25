@@ -1,4 +1,4 @@
-;(function() {
+(function() {
 "use strict"
 
 var ChatDetailCtrl = /*@ngInject*/function ($stateParams, Chats) {

@@ -1,4 +1,4 @@
-;(function() {
+(function() {
 "use strict"
 
 var AccountCtrl = /*@ngInject*/function ($scope, Application, UserService) {

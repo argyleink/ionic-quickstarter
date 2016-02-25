@@ -1,4 +1,4 @@
-;(function() {
+(function() {
 "use strict"
 appModule('app.hooks')
   // 'Mock' implementation of the AppHooks service'.

@@ -1,4 +1,4 @@
-;(function() {
+(function() {
 "use strict"
 
 var DashCtrl = /*@ngInject*/function (Application, $scope) {
