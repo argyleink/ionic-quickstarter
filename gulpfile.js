@@ -59,8 +59,6 @@ var paths = {
   locales: [
     './src/js/locales/*.json'
   ],
-  // TODO: use system fonts
-  ionicfonts: ['./src/lib/ionic/fonts/*'],
   lib: [
     './src/lib/ionic/js/' + files.ionicbundle,
     './src/lib/kinto.js/kinto-1.1.1.js',
@@ -258,10 +256,6 @@ gulp.task('index', ['clean', 'inject-index'], function() {
 
 // copy all other files to dist directly
 gulp.task('copy', ['clean', 'sass'], function() {
-
-  gulp.src(paths.ionicfonts)
-    .pipe(gulp.dest(paths.dist + '/lib/ionic/fonts'))
-
   // 'base' option, see: http://www.levihackwith.com/how-to-make-gulp-copy-a-directory-and-its-contents/
   gulp.src(paths.lib, {base: './src/lib'})
     .pipe(gulp.dest(paths.dist + '/lib'))
