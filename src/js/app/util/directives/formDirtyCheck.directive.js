@@ -4,7 +4,7 @@
   // Prevent the user from losing data by checking the from's "dirty" status before navigating away from the page.
   // Adapted from:
   // http://csharperimage.jeremylikness.com/2015/05/angularjs-project-essentials.html
-  // KNOWN BUG: the directive does not work properly when the user navigates away by selecting another Tab (ion-tabs)
+  // KNOWN EDGE CASE: the directive does not work properly when the user navigates away by selecting another Tab (ion-tabs)
 
   appModule('app.util').directive('formDirtyCheck', function ($rootScope, $state, $ionicPopup, $translate) {
       var popupTemplate   = null
@@ -34,7 +34,8 @@
           var cleanUpFn = angular.noop, unwatch, checkScope = function () {
             if (scope.dirty) {
               cleanUpFn = $rootScope.$on('$stateChangeStart',
-                function(event, toState, toParams, fromState, fromParams) {
+                function(event) {
+                  // potential inbound params: , toState, toParams, fromState, fromParams
                   // we start by immediately preventing the state/page switch, otherwise we are too late (because the "$ionicPopup.confirm()" call below works asynchronously so doesn't wait/block the default action)
                   event.preventDefault()
 

@@ -30,6 +30,7 @@
             deferred.reject(error)
           }, 
           function (progress) {
+            $log.debug(progress.loaded)
             //$timeout(function () {
             //  $scope.downloadProgress = (progress.loaded / progress.total) * 100
             //})

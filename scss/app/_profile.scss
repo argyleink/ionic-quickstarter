@@ -1,9 +1,7 @@
 // Profile header/images
 
 $profile-header-height: 120px !default;
-
 $profile-logo-size: 90px !default;
-
 $profile-logo-img-margin: 5px;
 $profile-logo-img-size: $profile-logo-size - (2 * $profile-logo-img-margin);
 
@@ -91,5 +89,5 @@ $profile-logo-img-size: $profile-logo-size - (2 * $profile-logo-img-margin);
 }
 
 .dialog-footer {
-  margin: 0 !important;
+  margin: 0;
 }

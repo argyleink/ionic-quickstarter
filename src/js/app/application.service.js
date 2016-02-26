@@ -279,7 +279,7 @@
         //
         // https://gist.github.com/kyletns/93a510465e433c1981e1
         //
-        deregisterBackbuttonHandler = $ionicPlatform.registerBackButtonAction(function (event) {
+        deregisterBackbuttonHandler = $ionicPlatform.registerBackButtonAction(function () {
 
           if ($ionicHistory.backView() === null) {  // no more previous screen in the history stack, so "back" would exit
             var key = 'exit-popup.'
@@ -317,12 +317,15 @@
 
       var showToast = function (message) {
         if (window.cordova) {
-          $cordovaToast.showLongCenter(message).then(function (success) {
+          $cordovaToast.showLongCenter(message)
+          .then(function () {
             $log.debug("Success: showToast('" + message + "')")
-          }, function (error) {
+          }, 
+          function (error) {
             $log.error("Error: showToast('" + message + "'), error: " + JSON.stringify(error))
           })
-        } else {
+        } 
+        else {
           $log.warn("NOTE - not running on device: showToast('" + message + "')")
         }
       }

@@ -215,7 +215,7 @@ appModule('app.user')
       var userData = {
         provider: FIREBASE_PASSWORD_PROVIDER,
         userName: userName,
-        password: password,
+        password: password
       }
 
       auth.$authWithPassword({
@@ -335,7 +335,7 @@ appModule('app.user')
       var consumerSecretKey   = TwitterReauthentication.consumerSecretKey
 
       oauthHelper.twitter(consumerKey, consumerSecretKey)
-      .then(function (result) {
+      .then(function () {
         $log.warn("Authenticated successfully")
         logFinished(w)
         deferred.resolve()

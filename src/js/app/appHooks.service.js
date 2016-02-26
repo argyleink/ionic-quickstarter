@@ -8,8 +8,6 @@ appModule('app.hooks')
     if (APP.devMode) {
       return $injector.get('AppHooksMockImpl')
     } else {
-      // TODO: swap for Kinto
-      // Firebase implementation
       return $injector.get('AppHooksFirebaseImpl')
     }
   })

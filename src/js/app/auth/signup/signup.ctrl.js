@@ -29,13 +29,15 @@ var SignupCtrl = /*@ngInject*/function ($scope, $state, Application, UserService
     }
 
     UserService.signup(userData)
-    .then(function (signedupUser) {
+    .then(function () {
+      // potential inbound param: signedupUser
       log.info("User signed up successfully")
 
       // send a reset-password email with a (new) temporary password
       return UserService.resetPassword(email)
     })
-    .then(function (signedupUser) {
+    .then(function () {
+      // potential inbound param: signedupUser
       Application.hideLoading()
       Application.setEmail(email)
 
@@ -87,7 +89,8 @@ var SignupCtrl = /*@ngInject*/function ($scope, $state, Application, UserService
     Application.showLoading(true)
 
     UserService.loginWithTwitter()
-    .then(function (loggedinUser) {
+    .then(function () {
+      // potential inbound param: loggedinUser
       Application.hideLoading()
       Application.gotoStartPage($state)
     })

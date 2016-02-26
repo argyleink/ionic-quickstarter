@@ -6,11 +6,10 @@ var AccountCtrl = /*@ngInject*/function ($scope, Application, UserService) {
   var log   = Application.getLogger('AccountCtrl')
   var user
 
-  $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+  $scope.$on('$ionicView.beforeEnter', function () {
+    // potential inbound params: event, viewData
     log.debug("beforeEnter start ...")
-
     user = UserService.currentUser()
-
     log.debug("beforeEnter end")
   })
 

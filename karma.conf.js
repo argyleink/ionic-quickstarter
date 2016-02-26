@@ -53,18 +53,24 @@ module.exports = function(config) {
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
 
-
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
-
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'],
 
-
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: false,
+
+    junitReporter: {
+      outputDir:          'test/', // results will be saved as $outputDir/$browserName.xml
+      outputFile:         undefined, // if included, results will be saved as $outputDir/$browserName/$outputFile
+      suite:              '', // suite will become the package name attribute in xml testsuite element
+      useBrowserName:     true, // add browser name to report and classes names
+      nameFormatter:      undefined, // function (browser, result) to customize the name attribute in xml testcase element
+      classNameFormatter: undefined // function (browser, result) to customize the classname attribute in xml testcase element
+    }
   })
 }

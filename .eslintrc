@@ -32,15 +32,10 @@ env:
 globals:
   angular: true
 
-
-plugins: [
-  # e.g. react (must run `npm install eslint-plugin-react` first)
-]
-
 rules:
   ##### Possible Errors #####
 
-  no-comma-dangle: 0         # disallow trailing commas in object literals
+  comma-dangle: 2            # disallow trailing commas in object literals
   no-cond-assign: 0          # disallow assignment in conditional expressions
   no-console: 2              # disallow use of console (off by default in the node environment)
   no-constant-condition: 0   # disallow use of constant expressions in conditions
@@ -134,21 +129,10 @@ rules:
   no-shadow: 0                   # disallow declaration of variables already declared in the outer scope
   no-shadow-restricted-names: 0  # disallow shadowing of names such as arguments
   no-undef: 0                    # disallow use of undeclared variables unless mentioned in a /*global */ block
-  no-undef-init: 0               # disallow use of undefined when initializing variables
+  no-undef-init: 2               # disallow use of undefined when initializing variables
   no-undefined: 0                # disallow use of undefined variable (off by default)
-  no-unused-vars: 0              # disallow declaration of variables that are not used in the code
+  no-unused-vars: 2              # disallow declaration of variables that are not used in the code
   no-use-before-define: 0        # disallow use of variables before they are defined
-
-
-  ##### Node.js #####
-
-  handle-callback-err: 0   # enforces error handling in callbacks (off by default) (on by default in the node environment)
-  no-mixed-requires: 0     # disallow mixing regular variable and require declarations (off by default) (on by default in the node environment)
-  no-new-require: 0        # disallow use of new operator with the require function (off by default) (on by default in the node environment)
-  no-path-concat: 0        # disallow string concatenation with __dirname and __filename (off by default) (on by default in the node environment)
-  no-process-exit: 0       # disallow process.exit() (on by default in the node environment)
-  no-restricted-modules: 0 # restrict usage of specified node modules (off by default)
-  no-sync: 0               # disallow use of synchronous methods (off by default)
 
 
   ##### Stylistic Issues #####
@@ -168,7 +152,7 @@ rules:
   no-array-constructor: 0      # disallow use of the Array constructor
   no-inline-comments: 0        # disallow comments inline after code (off by default)
   no-lonely-if: 0              # disallow if as the only statement in an else block (off by default)
-  no-mixed-spaces-and-tabs: 0  # disallow mixed spaces and tabs for indentation
+  no-mixed-spaces-and-tabs: 2  # disallow mixed spaces and tabs for indentation
   no-multiple-empty-lines: 0   # disallow multiple empty lines (off by default)
   no-nested-ternary: 0         # disallow nested ternary expressions (off by default)
   no-new-object: 0             # disallow use of the Object constructor

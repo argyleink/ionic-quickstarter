@@ -122,13 +122,6 @@ gulp.task('build', [
   'copy'
 ])
 
-// utility tasks for DEV/PROD/TEST (whichever)
-gulp.task('jshint', function() {
-  gulp.src(paths.scripts)
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'))
-})
-
 // === CHILD TASKS ===
 // use 'del' instead of 'clean', see: https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md
 gulp.task('clean', function (cb) {

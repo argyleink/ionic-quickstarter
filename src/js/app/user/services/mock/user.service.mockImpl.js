@@ -43,7 +43,8 @@ appModule('app.user')
       return currentLoggedinUser
     }
 
-    var signup = function (user) {
+    var signup = function () {
+      // potential inbound params: user
       var deferred = $q.defer()
       logout()
       $log.debug("Signup start ...")
@@ -89,7 +90,8 @@ appModule('app.user')
       return deferred.promise
     }
 
-    var changePassword = function (email, passwordOld, passwordNew) {
+    var changePassword = function () {
+      // potential inbound params: email, passwordOld, passwordNew
       var deferred = $q.defer()
       logout()
 
@@ -100,7 +102,8 @@ appModule('app.user')
       return deferred.promise
     }
 
-    var resetPassword = function (email) {
+    var resetPassword = function () {
+      // potential inbound params: email
       var deferred = $q.defer()
 
       logout()
@@ -209,7 +212,6 @@ appModule('app.user')
       return deferred.promise
     }
 
-    // TODO: remove this and associated calls
     var canLoginWithTwitter = function () {
       return false
     }

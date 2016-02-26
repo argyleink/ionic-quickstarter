@@ -8,6 +8,10 @@ linters:
     enabled: true
     max_depth: 4
 
+  Shorthand:
+    enabled: true
+    allowed_shorthands: [1]
+
   ColorVariable:
     enabled: false
 
@@ -68,4 +72,7 @@ linters:
     force_nesting: true
 
   BorderZero:
+    enabled: false
+
+  PlaceholderInExtend:
     enabled: false

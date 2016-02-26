@@ -10,7 +10,8 @@
       restrict: 'A',
       require:  ['^form'],
       scope:    true,
-      link: function (scope, element, attrs, ctrls, transclude) {
+      link: function (scope, element, attrs, ctrls) {
+        // potential inbound params: transclude
         scope.inputModel  = scope.$eval(attrs['formField'])
         var unwatch       = scope.$watchCollection(getFieldStatus, changeCssClasses)
         var parent        = element.parent()

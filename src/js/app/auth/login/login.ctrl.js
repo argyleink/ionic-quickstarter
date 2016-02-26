@@ -3,7 +3,7 @@
 
   var LoginCtrl = /*@ngInject*/function ($scope, $state, $stateParams, Application, UserService) {
     var vm    = this
-    var log   = Application.getLogger('LoginCtrl')
+    // var log   = Application.getLogger('LoginCtrl')
 
     $scope.$on('$ionicView.beforeEnter', function () {
       // enforce/ensure no logged in user at this point
@@ -22,7 +22,8 @@
       Application.showLoading(true)
 
       UserService.login(('' + vm.user.username).toLowerCase(), vm.user.password)
-      .then(function (loggedinUser) {
+      .then(function () {
+        // potential inbound param: loggedinUser
         Application.hideLoading()
         Application.gotoStartPage($state)
       })
@@ -43,7 +44,8 @@
       Application.showLoading(true)
 
       UserService.loginWithTwitter()
-      .then(function (loggedinUser) {
+      .then(function () {
+        // potential inbound param: loggedinUser
         Application.hideLoading()
         Application.gotoStartPage($state)
       })

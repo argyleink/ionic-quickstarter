@@ -25,7 +25,6 @@
       // From: https://medium.com/@kentcdodds/counting-angularjs-watchers-11c5134dc2ef
       function getWatchers(root) {
         root = angular.element(root || document.documentElement)
-        var watcherCount = 0
 
         function getElemWatchers(element) {
           var isolateWatchers   = getWatchersFromScope(element.data().$isolateScope)

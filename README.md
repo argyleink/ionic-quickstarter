@@ -15,10 +15,7 @@ It is also recommended to have the following command line tools installed:
 
 Check if these are installed, and if not install them 'globally' using ```npm``` with the "-g" (global) flag.
 
-***Note:*** as described on Ionic's "Getting Started" page, the currently recommended version of ```nodejs``` is
-version 4. Lower versions (0.x versions such as 0.10.x, 0.11.x or 0.12.x) are not recommended because they are quickly
-becoming outdated as they do not support newer versions of ```nodejs``` based tools, and higher versions (5.x) do not
-work yet at the moment.
+***Note:*** as described on Ionic's "Getting Started" page, the currently recommended version of ```nodejs``` is version 4. Lower versions (0.x versions such as 0.10.x, 0.11.x or 0.12.x) are not recommended because they are quickly becoming outdated as they do not support newer versions of ```nodejs``` based tools, and higher versions (5.x) do not work yet at the moment.
 
 The version I am currently using is v4.2.6, so that is what I would recommend (v4.2.6 or higher, but not v.5.x).
 
@@ -150,14 +147,6 @@ This is done through a configuration section in the ```ionic.project``` file:
     "default",
     "watch"
  ]
-```
-
-### Gulp jshint
-
-You can run this to hint/lint your Javascript code. Just execute:
-
-```
-gulp jshint
 ```
 
 ### Gulp test and gulp test-single

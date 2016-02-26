@@ -146,7 +146,8 @@
     }
 
     // www.jvandemo.com/how-to-use-areas-and-border-states-to-control-access-in-an-angular-application-with-ui-router/
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+    $rootScope.$on('$stateChangeStart', function (event, toState) {
+      // potential inbound params: , toParams, fromState
       // when state name matches 'app.auth.*' then login is required
       if (toState.name && toState.name.match(/^app\.auth\./)) {
         if (!isValidUser()) {
@@ -168,7 +169,8 @@
       checkValidUser()
     })
 
-    $rootScope.$on(UserService.loadUserDataError(), function (event, error) {
+    $rootScope.$on(UserService.loadUserDataError(), function () {
+      // potential inbound params: event
       $log.error("APP - error loading user data")
 
       // check valid user now that the user data has been loaded (so the user's role is know)

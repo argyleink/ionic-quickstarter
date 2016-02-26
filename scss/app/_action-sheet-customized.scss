@@ -1,19 +1,11 @@
 // Action sheets
 
-//
 // OVERRIDE IONIC'S STYLES FOR ANDROID
-//
-// We don't like the platform-specific customizations to the action sheets that Ionic makes for Android (for instance,
-// removing the Cancel button etc). To get rid of this, we copied the 'standard' _action-sheet.scss and commented out
-// the platform-android styles.
-//
+// We don't like the platform-specific customizations to the action sheets that Ionic makes for Android (for instance, removing the Cancel button etc). To get rid of this, we copied the 'standard' _action-sheet.scss and commented out the platform-android styles.
+
 // For background info see:
-//
 // http://forum.ionicframework.com/t/actionsheets-android-ugly-styling-need-help/18462/3
-//
-// NOTE: to include this customized stylesheet instead of the standard one, we use a copied/customized version of the
-// 'master" ionic.scss file (see: ionic-customized.scss).
-//
+// NOTE: to include this customized stylesheet instead of the standard one, we use a copied/customized version of the 'master" ionic.scss file (see: ionic-customized.scss).
 
 .action-sheet-backdrop {
   @include transition(background-color 150ms ease-in-out);

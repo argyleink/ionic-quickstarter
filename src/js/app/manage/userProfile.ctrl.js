@@ -3,7 +3,6 @@
 
   var UserProfileCtrl = /*@ngInject*/function ($scope, $rootScope, $state, $timeout, $ionicModal, $ionicActionSheet, $translate, $q, $stateParams, Application, ImageService, FileManager, UserService) {
 
-    var user
     var vm                  = this
     var log                 = Application.getLogger('UserProfileCtrl')
     var onboarding          = false
@@ -46,10 +45,11 @@
       }
     }
 
-    $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+    $scope.$on('$ionicView.beforeEnter', function () {
+      // potential inbound params: event, viewData
       log.debug("beforeEnter start ...")
 
-      user = UserService.currentUser()
+      vm.user = UserService.currentUser()
 
       Application.resetForm(vm)
       Application.contentBannerInit(vm, $scope)
@@ -59,9 +59,7 @@
 
       load()
 
-      var key = 'manage.userProfile.title'
-
-      $translate(key)
+      $translate('manage.userProfile.title')
       .then(function (translation) {
         vm.title = translation
       })
@@ -71,7 +69,8 @@
 
     // 'user.loaded' event listener: user data is loaded asynchronously after logging in or after application startup
     // (if the user was/remains logged in)
-    $rootScope.$on(UserService.loadUserDataSuccess(), function (event, userData) {
+    $rootScope.$on(UserService.loadUserDataSuccess(), function () {
+      // potential inbound params: event, userData
       log.info("Received loadUserDataSuccess event")
       load()
     })
@@ -82,7 +81,8 @@
       get: function () {
         return vm.user.sex && vm.user.sex == 'M'
       },
-      set: function (newValue) {
+      set: function () {
+        // potential inbound params: newValue
         vm.user.sex = 'M'
       }
     })
@@ -91,7 +91,8 @@
       get: function () {
         return vm.user.sex && vm.user.sex == 'F'
       },
-      set: function (newValue) {
+      set: function () {
+        // potential inbound params: newValue
         vm.user.sex = 'F'
       }
     })
@@ -308,7 +309,8 @@
       Application.showLoading(true)
 
       UserService.saveProfile(vm.user)
-      .then(function (signedupUser) {
+      .then(function () {
+        // potential inbound param: signedupUser
         Application.hideLoading()
 
         // set the form to "pristine" (i.e. set 'dirty' to false) because the form has been saved now; otherwise the
@@ -327,7 +329,7 @@
           gotoNextPage()
         }, 0)
       })
-      .catch(function (error) {
+      .catch(function () {
         Application.hideLoading()
         Application.errorMessage(vm, true, 'message.unknown-error')
       })

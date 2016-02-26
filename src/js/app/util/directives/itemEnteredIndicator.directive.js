@@ -9,7 +9,8 @@
       replace:  false,
       template: '<span class="italic note brand-secondary" ng-show="isVisible" translate>prompt.not-entered-yet</span>',
       scope:    true,
-      link: function (scope, element, attrs, ctrls, transclude) {
+      link: function (scope, element, attrs) {
+        // potential inbound params: , ctrls, transclude
         scope.isVisible = false
 
         var unwatch = scope.$watchCollection(showMessage, toggleVisible)

@@ -1,18 +1,16 @@
 ---
 engines:
-  duplication:
-    enabled: true
-    config:
-      languages:
-      - javascript
-      exclude_paths: 
-      - "src/**/*{mock|Impl}.js"
   eslint:
     enabled: true
   fixme:
     enabled: true
   scss-lint:
     enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
 ratings:
   paths:
   - "scss/**/*.scss"
