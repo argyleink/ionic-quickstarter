@@ -1,4 +1,6 @@
 var failFast = require('protractor-fail-fast');
+// add jasmine spec reporter: https://github.com/bcaudan/jasmine-spec-reporter
+var SpecReporter = require('jasmine-spec-reporter');
 
 /* global browser */
 exports.config = {
@@ -6,7 +8,7 @@ exports.config = {
   specs: [
     // E2E test specs are organized by user stories, not necessarily reflecting the code structure of the project.
     // Imagine things your users might do, and write e2e tests around those behaviors.
-    'test/e2e/**/*.spec.js',
+    'test/e2e/**/*.spec.js'
   ],
   capabilities: {
     // You can use other browsers like firefox, phantoms, safari, IE, etc.
@@ -49,9 +51,6 @@ exports.config = {
 
   onPrepare: function () {
     jasmine.getEnv().addReporter(failFast.init());
-
-    // add jasmine spec reporter: https://github.com/bcaudan/jasmine-spec-reporter
-    var SpecReporter = require('jasmine-spec-reporter');
 
     var opts = {
       displayStacktrace: 'none',    // display stacktrace for each failed assertion, values: (all|specs|summary|none)

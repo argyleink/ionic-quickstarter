@@ -5,6 +5,8 @@ engines:
     config:
       languages:
       - javascript
+      exclude_paths: 
+      - "src/**/*{mock|Impl}.js"
   eslint:
     enabled: true
   fixme:
@@ -13,9 +15,15 @@ engines:
     enabled: true
 ratings:
   paths:
-  - "**.scss"
-  - "**.js"
+  - "scss/**/*.scss"
+  - "src/**/*.js"
 exclude_paths:
 - hooks/
-- tests/
-- www/lib/
+- test/
+- src/lib/
+- src/js/lib
+- node_modules/
+- gulpfile.js
+- karma.conf.js
+- protractor.conf.js
+- .eslintrc

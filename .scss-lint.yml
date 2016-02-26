@@ -1,1 +1,71 @@
-exclude: 'www/lib/**'
+scss_files: 'scss/**/*.scss'
+
+linters:
+  ColorKeyword:
+    enabled: false
+
+  NestingDepth:
+    enabled: true
+    max_depth: 4
+
+  ColorVariable:
+    enabled: false
+
+  VendorPrefix:
+    enabled: false
+
+  Comment:
+    enabled: true
+    style: silent
+
+  PseudoElement:
+    enabled: true
+
+  SpaceAfterComma:
+    enabled: false
+    # style: one_space
+
+  SpaceAfterPropertyColon:
+    enabled: true
+    style: one_space
+
+  SpaceAfterPropertyName:
+    enabled: true
+
+  SpaceAfterVariableColon:
+    enabled: false
+    style: one_space
+
+  SpaceAfterVariableName:
+    enabled: true
+
+  TransitionAll:
+    enabled: false
+
+  PropertySortOrder:
+    enabled: false
+
+  ZeroUnit:
+    enabled: false
+
+  EmptyLineBetweenBlocks:
+    enabled: false
+
+  LeadingZero:
+    enabled: false
+
+  UnnecessaryMantissa:
+    enabled: false
+
+  QualifyingElement:
+    enabled: true
+    allow_element_with_attribute: true
+    allow_element_with_class: true
+    allow_element_with_id: false
+
+  MergeableSelector:
+    enabled: false
+    force_nesting: true
+
+  BorderZero:
+    enabled: false

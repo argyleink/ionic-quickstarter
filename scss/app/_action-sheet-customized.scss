@@ -1,6 +1,4 @@
-/*
-    Action sheets
-*/
+// Action sheets
 
 //
 // OVERRIDE IONIC'S STYLES FOR ANDROID
@@ -77,7 +75,8 @@
     }
   }
 
-  .button.active, .button.activated {
+  .button.active,
+  .button.activated {
     box-shadow: none;
     border-color: $sheet-options-border-color;
     color: $sheet-options-text-color;
