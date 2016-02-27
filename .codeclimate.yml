@@ -10,12 +10,15 @@ engines:
     enabled: true
     config:
       languages:
-      - javascript
+        javascript:
+          mass_threshold: 80
 ratings:
   paths:
   - "scss/**/*.scss"
   - "src/**/*.js"
 exclude_paths:
+- src/**/*Impl.js
+- www/
 - hooks/
 - test/
 - src/lib/
