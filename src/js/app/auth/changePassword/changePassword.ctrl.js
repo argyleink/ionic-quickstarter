@@ -1,7 +1,11 @@
 (function () {
 "use strict"
 
+<<<<<<< HEAD
 var ChangePasswordCtrl = /*@ngInject*/function ($scope, $rootScope, $state, $stateParams, $translate, Application, UserService) {
+=======
+var ChangePasswordCtrl = /*@ngInject*/function ($scope, $state, $stateParams, $translate, Application, UserService) {
+>>>>>>> leob/master
 
   var vm          = this
   var onboarding  = false
@@ -34,11 +38,18 @@ var ChangePasswordCtrl = /*@ngInject*/function ($scope, $rootScope, $state, $sta
 
   // the ionic-content-banner needs to be displayed in the 'enter' event because it will only work if the view is displayed completely
   $scope.$on('$ionicView.enter', function () {
+<<<<<<< HEAD
     var keys    = ['message.check-your-email1', 'message.check-your-email2']
     var params  = {your: $rootScope._yr}
 
     Application.contentBannerShow(vm, keys, null, null, 'error', params)
   })
+=======
+    var keys = ['message.check-your-email1', 'message.check-your-email2'];
+
+    Application.contentBannerShow(vm, keys, null, null, 'error');
+  });
+>>>>>>> leob/master
 
   vm.changePassword = function (form) {
     if (!form.$valid) return

@@ -1,8 +1,77 @@
 # Kinnect
 
+<<<<<<< HEAD
 ### This started from a boilerplate and Reference app providing tools and best practices to kickstart ionic app development
 For background and more info, peep the fork 
 <a href="https://github.com/leob/ionic-quickstarter" target="_blank">Original Fork</a>.
+=======
+### A boilerplate and Reference app providing tools and best practices to kickstart your app development
+
+For background, read my
+<a href="http://codepen.io/leob6/blog/ionic-quickstarter-a-starter-app-to-kickstart-your-app-development" target="_blank">
+blog post</a>.
+
+***IMPORTANT NOTE:*** I've added two useful sections to the Wiki:
+
+* [Release notes](https://github.com/leob/ionic-quickstarter/wiki/Release-notes)
+* [Tips and troubleshooting](https://github.com/leob/ionic-quickstarter/wiki/Tips-and-troubleshooting)
+
+Please make a habit of consulting these Wiki pages because they contain important information. 
+
+Also I've updated the following sections (on Februari 26, 2016):
+
+* [Common recipes](https://github.com/leob/ionic-quickstarter/wiki/Common-recipes)
+* [Unit testing and E2E Testing](https://github.com/leob/ionic-quickstarter/wiki/Unit-testing-and-E2E-Testing)
+
+I intend to keep this starter app up to date with the newest versions of Ionic etc, and to add features/improvements.
+See [Todo and Roadmap](https://github.com/leob/ionic-quickstarter/wiki/Todo-and-roadmap) on the Wiki, and feel free to
+[contribute](https://github.com/leob/ionic-quickstarter/wiki/Contributing).
+
+***NOTE:*** this starter app is based on Ionic 1.x and Angular 1.x.
+
+The upcoming new Ionic 2 release will, in all likelihood, address 80-90% of the issues which this starter app aims to
+address (e.g. build system, SASS/styling, common Ionic 'gotchas' and so on). So, "post-Ionic 2" this starter (and most
+other starters) will probably lose a lot of their relevance.
+
+## Table of contents
+
+[Introduction](#introduction)<br>
+[Installation and usage](#installation-and-usage)<br>
+[Gulp file](#gulp-file)<br>
+[Project structure](#project-structure)<br>
+[Contribute](#contributing)
+
+## Introduction
+
+Ionic Quickstarter is based on the "tabs starter" project from Ionic, but has the following extras:
+
+* An improved gulp.js file (with a build process optimized for production, with template caching etc)
+* Improved project structure (a modular app structure suitable for bigger apps)
+* Application script files (Javascript) will be automatically included in your index.html by the gulp build process  
+* Per environment, you can define different values for constants (e.g. appKey and so on) which are then written into
+  config.js by the appropriate gulp task
+* Unit test support using Karma and Jasmine
+* Typescript Definition Files ('tsd' files) which enable autocomplete/intelli-sense features when you use an IDE such
+as WebStorm or Visual Studio
+* Signup and login flow implemented with Firebase (with the flexibility to add other implementations)
+* Support for the two main Ionic UI patterns: side menus and tabs, and an Intro screen with a Slider
+* Includes some commonly used features, for instance form validation using ng-messages and improved logging
+* Basic image support: Cordova camera, image cropping, storing images in local storage, and displaying images
+* Supports internationalization (I18N) using the <a href="https://github.com/angular-translate/angular-translate"
+target="_blank">angular-translate</a> library (currently only an English language file is supplied, it's easy to add
+other languages)
+* Provides workarounds for a number of well-known issues in Ionic apps (swipe to close menu, hardware back button etc)
+* Incorporates a number of 'best practices' for AngularJS and Ionic (e.g. "Controller as" syntax)
+* A modular SASS setup including some handy utility styles and best practices for customization of colors, fonts etc.
+* Reusable services and directives containing some commonly used utility functions that you can call in your app 
+* An 'appModule' utility function that makes managing your AngularJS modules slightly easier
+* Currently based on Ionic v.1.1.0 and AngularJS 1.4; tested on 3 devices: iPhone 4, Android smartphone, Android tablet
+
+The first two topics (Project structure and Gulp file) will be explained below.
+
+To keep this README short (it's already too long), I'm putting the rest of the information on the
+[Wiki](https://github.com/leob/ionic-quickstarter/wiki).
+>>>>>>> leob/master
 
 ## Installation and usage
 

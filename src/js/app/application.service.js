@@ -94,9 +94,16 @@
       }
 
       var resetForm = function (vm) {
+<<<<<<< HEAD
         vm.form.$setPristine()
         vm.error = {}
       }
+=======
+        vm.form.$setPristine();
+        vm.form.parent = vm;
+        vm.error = {};
+      };
+>>>>>>> leob/master
 
       var getLogger = function (context) {
         return $log.getLogger(context)
